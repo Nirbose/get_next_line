@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ltuffery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/16 16:05:59 by ltuffery          #+#    #+#             */
-/*   Updated: 2022/10/17 01:00:43 by ltuffery         ###   ########.fr       */
+/*   Created: 2022/10/17 01:02:47 by ltuffery          #+#    #+#             */
+/*   Updated: 2022/10/17 01:05:56 by ltuffery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,15 @@ char	*ft_get_line(char *str)
 
 char	*get_next_line(int fd)
 {
-	static char	*str;
+	static char	*str[1024];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	str = ft_read_line(fd, str);
-	if (str == NULL)
+	str[fd] = ft_read_line(fd, str[fd]);
+	if (str[fd] == NULL)
 		return (NULL);
-	line = ft_get_line(str);
-	str = ft_substr(str);
+	line = ft_get_line(str[fd]);
+	str[fd] = ft_substr(str[fd]);
 	return (line);
 }
