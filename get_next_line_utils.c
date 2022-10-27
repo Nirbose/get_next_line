@@ -6,7 +6,7 @@
 /*   By: ltuffery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 16:07:14 by ltuffery          #+#    #+#             */
-/*   Updated: 2022/10/17 01:24:37 by ltuffery         ###   ########.fr       */
+/*   Updated: 2022/10/21 20:26:05 by ltuffery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (s1 == NULL)
 	{
 		s1 = malloc(sizeof(char) * 1);
+		if (s1 == NULL)
+			return (NULL);
 		s1[0] = '\0';
 	}
 	if (!s1 || !s2)
@@ -107,5 +109,10 @@ char	*ft_substr(char *str)
 	}
 	ft_strlcpy(new_str, &str[i], len + 1);
 	free(str);
+	if (new_str[0] == '\0')
+	{
+		free(new_str);
+		return (NULL);
+	}
 	return (new_str);
 }

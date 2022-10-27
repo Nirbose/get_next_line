@@ -6,7 +6,7 @@
 /*   By: ltuffery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 16:05:59 by ltuffery          #+#    #+#             */
-/*   Updated: 2022/10/17 01:00:43 by ltuffery         ###   ########.fr       */
+/*   Updated: 2022/10/21 14:14:11 by ltuffery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,16 @@ char	*ft_read_line(int fd, char *str)
 
 	read_status = 1;
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (buffer == NULL)
+		return (NULL);
 	buffer[0] = '\0';
 	while (ft_strchr(buffer, '\n') == 0 && read_status != 0)
 	{
 		read_status = read(fd, buffer, BUFFER_SIZE);
 		if (read_status == -1)
 		{
+			if (str != NULL)
+				free(str);
 			free(buffer);
 			return (NULL);
 		}
@@ -48,12 +52,7 @@ char	*ft_get_line(char *str)
 	line = malloc(sizeof(char) * (i + 2));
 	if (line == NULL)
 		return (NULL);
-	i = 0;
-	while (str[i] != '\0' && str[i] != '\n')
-	{
-		line[i] = str[i];
-		i++;
-	}
+	ft_strlcpy(line, str, i + 1);
 	if (str[i] == '\n')
 	{
 		line[i] = '\n';

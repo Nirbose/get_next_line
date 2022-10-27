@@ -6,7 +6,7 @@
 /*   By: ltuffery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 01:03:21 by ltuffery          #+#    #+#             */
-/*   Updated: 2022/10/17 01:03:22 by ltuffery         ###   ########.fr       */
+/*   Updated: 2022/10/20 16:02:35 by ltuffery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr(char *str);
 int		ft_strlen(const char *s);
+int		ft_strlcpy(char *dest, const char *src, int size);
 
 #endif

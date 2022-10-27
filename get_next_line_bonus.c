@@ -6,11 +6,11 @@
 /*   By: ltuffery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 01:02:47 by ltuffery          #+#    #+#             */
-/*   Updated: 2022/10/17 01:05:56 by ltuffery         ###   ########.fr       */
+/*   Updated: 2022/10/23 17:47:07 by ltuffery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_read_line(int fd, char *str)
 {
@@ -19,12 +19,16 @@ char	*ft_read_line(int fd, char *str)
 
 	read_status = 1;
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (buffer == NULL)
+		return (NULL);
 	buffer[0] = '\0';
 	while (ft_strchr(buffer, '\n') == 0 && read_status != 0)
 	{
 		read_status = read(fd, buffer, BUFFER_SIZE);
 		if (read_status == -1)
 		{
+			if (str != NULL)
+				free(str);
 			free(buffer);
 			return (NULL);
 		}
@@ -48,12 +52,7 @@ char	*ft_get_line(char *str)
 	line = malloc(sizeof(char) * (i + 2));
 	if (line == NULL)
 		return (NULL);
-	i = 0;
-	while (str[i] != '\0' && str[i] != '\n')
-	{
-		line[i] = str[i];
-		i++;
-	}
+	ft_strlcpy(line, str, i + 1);
 	if (str[i] == '\n')
 	{
 		line[i] = '\n';
